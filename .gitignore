@@ -21,3 +21,5 @@ mlruns/
 # IDE
 .vscode/
 .idea/
+.venv-feast/
+__pycache__/
