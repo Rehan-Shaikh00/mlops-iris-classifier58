@@ -23,3 +23,12 @@ mlruns/
 .idea/
 .venv-feast/
 __pycache__/
+
+# =========================================================
+# MLflow
+# =========================================================
+.venv-mlflow/
+mlruns/
+mlflow.db
+mlartifacts/
+confusion_matrix_*.png
