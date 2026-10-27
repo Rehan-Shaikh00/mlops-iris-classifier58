@@ -15,12 +15,14 @@ FEATURE_COLS = [
     "sepal_area", "petal_area", "sepal_to_petal_length_ratio",
 ]
 
+
 def load_dataset(path: str):
     df = pd.read_csv(path)
     le = LabelEncoder()
     y = le.fit_transform(df["species"])
     X = df[FEATURE_COLS].fillna(df[FEATURE_COLS].median())
     return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
 
 def run_baseline(data_path: str):
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
@@ -43,6 +45,7 @@ def run_baseline(data_path: str):
         print(f"Baseline CV f1_macro: {cv_scores.mean():.4f} (+/- {cv_scores.std():.4f})")
         print(f"Baseline test accuracy: {test_score:.4f}")
         return cv_scores.mean()
+
 
 if __name__ == "__main__":
     run_baseline("data/processed/iris_features.csv")

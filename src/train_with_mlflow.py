@@ -3,16 +3,8 @@
 Trains multiple model configurations on the Experiment 4 feature set,
 logging parameters, metrics, and artifacts to MLflow for each run.
 """
-import os
-
-import matplotlib
-matplotlib.use("Agg")  # no GUI window needed
-import matplotlib.pyplot as plt
-import mlflow
-import mlflow.sklearn
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import (
     ConfusionMatrixDisplay,
     accuracy_score,
@@ -21,8 +13,16 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
 )
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+import mlflow.sklearn
+import mlflow
+import matplotlib.pyplot as plt
+import os
+
+import matplotlib
+matplotlib.use("Agg")  # no GUI window needed
 
 # 1. MLflow configuration
 mlflow.set_tracking_uri(

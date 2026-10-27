@@ -22,12 +22,14 @@ PARAM_GRID = {
     "max_features": ["sqrt", "log2"],
 }
 
+
 def load_dataset(path: str):
     df = pd.read_csv(path)
     le = LabelEncoder()
     y = le.fit_transform(df["species"])
     X = df[FEATURE_COLS].fillna(df[FEATURE_COLS].median())
     return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
 
 def run_grid_search(data_path: str):
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
@@ -72,6 +74,7 @@ def run_grid_search(data_path: str):
         print(f"Best CV f1_macro: {grid.best_score_:.4f}")
         print(f"Test accuracy: {test_score:.4f}")
         return grid.best_score_, grid.best_params_
+
 
 if __name__ == "__main__":
     run_grid_search("data/processed/iris_features.csv")

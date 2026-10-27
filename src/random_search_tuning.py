@@ -24,12 +24,14 @@ PARAM_DIST = {
 }
 N_ITER = 30  # budget smaller than the 72-combination grid
 
+
 def load_dataset(path: str):
     df = pd.read_csv(path)
     le = LabelEncoder()
     y = le.fit_transform(df["species"])
     X = df[FEATURE_COLS].fillna(df[FEATURE_COLS].median())
     return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
 
 def run_random_search(data_path: str):
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
@@ -71,6 +73,7 @@ def run_random_search(data_path: str):
         print(f"Best CV f1_macro: {search.best_score_:.4f}")
         print(f"Test accuracy: {test_score:.4f}")
         return search.best_score_, search.best_params_
+
 
 if __name__ == "__main__":
     run_random_search("data/processed/iris_features.csv")
