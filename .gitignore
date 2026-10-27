@@ -32,3 +32,6 @@ mlruns/
 mlflow.db
 mlartifacts/
 confusion_matrix_*.png
+test-results.xml
+.coverage
+.pytest_cache/
